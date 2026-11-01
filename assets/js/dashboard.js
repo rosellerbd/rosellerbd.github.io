@@ -38,8 +38,8 @@ async function init() {
   if (!data) {
     root.innerHTML = `<div class="account-empty">
       <div class="em-icon">⚠️</div>
-      <h2>Profile not found</h2>
-      <p>Your account exists in Firebase but has no profile row in Supabase.</p>
+      <h2>Profile is not varifed</h2>
+      <p>Your account is waiting for approval. Please allow us sometime. We will review your request as soon as possible.</p>
       <p style="font-size:11.5px;color:#9ca3af;margin-top:8px;">User ID: ${user.uid}</p>
       <button class="btn-secondary" id="logout-empty" style="margin-top:16px;">Sign out</button>
     </div>`;
