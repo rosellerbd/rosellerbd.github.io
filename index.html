@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Roseller — Leading Fashion &amp; Garments Online Shop in Bangladesh</title>
+  <meta name="description" content="Roseller is Bangladesh's trusted fashion shop for men's shirts, pants, t-shirts, women's dresses, kurtis, sarees, kids wear and accessories.">
+  <link rel="icon" type="image/png" sizes="64x64" href="images/roseller-logo-64x64-transparent.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="images/roseller-logo-128x128-transparent.png">
+  <link rel="apple-touch-icon" sizes="128x128" href="images/roseller-logo-128x128-transparent.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <div data-include="partials/header.html"></div>
+
+  <!-- HERO BANNER SLIDER -->
+  <section class="hero-banner-wrap">
+    <div class="container">
+      <div class="hero-banner-grid">
+
+        <!-- LEFT: Vertical banner -->
+        <aside class="hero-side">
+          <a href="products.html" class="hero-vertical-banner"
+             style="background-image:url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&h=800&fit=crop&q=80')"
+             aria-label="Shop the new collection">
+            <div class="hero-vertical-overlay"></div>
+            <div class="hero-vertical-content">
+              <span class="hero-vertical-tag">NEW SEASON</span>
+              <h3>Up to<br><span>40% Off</span></h3>
+              <p>Fresh styles just landed</p>
+            </div>
+          </a>
+        </aside>
+
+        <!-- CENTER: Rotating Banner Slider -->
+        <div class="hero-slider" id="hero-slider">
+          <div class="hero-slide is-active"
+               style="background-image:url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&h=500&fit=crop&q=80')">
+            <div class="hero-slide-overlay"></div>
+          </div>
+
+          <div class="hero-slide"
+               style="background-image:url('https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1200&h=500&fit=crop&q=80')">
+            <div class="hero-slide-overlay hero-slide-overlay--red"></div>
+          </div>
+
+          <div class="hero-slide"
+               style="background-image:url('https://images.unsplash.com/photo-1445205170230-053b83016050?w=1200&h=500&fit=crop&q=80')">
+            <div class="hero-slide-overlay hero-slide-overlay--dark"></div>
+          </div>
+
+          <div class="hero-slider-dots">
+            <button class="hero-dot is-active" data-slide="0" aria-label="Slide 1"></button>
+            <button class="hero-dot" data-slide="1" aria-label="Slide 2"></button>
+            <button class="hero-dot" data-slide="2" aria-label="Slide 3"></button>
+          </div>
+        </div>
+
+        <!-- RIGHT: Offer Cards -->
+        <aside class="hero-offers">
+          <div class="offer-card offer-card--image"
+               style="background-image:url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=300&h=200&fit=crop&q=80')">
+            <div class="offer-card-body">
+              <span class="offer-tag">NEW</span>
+              <strong>Winter Collection</strong>
+              <p>Fresh styles just landed</p>
+            </div>
+          </div>
+          <div class="offer-card offer-card--image"
+               style="background-image:url('https://images.unsplash.com/photo-1483985988355-763728e1935b?w=300&h=200&fit=crop&q=80')">
+            <div class="offer-card-body">
+              <span class="offer-tag offer-tag--dark">40% OFF</span>
+              <strong>Women's Kurti Fest</strong>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- NOTICE TICKER -->
+  <section class="notice-ticker" id="notice-ticker" aria-label="Latest notices" hidden>
+    <div class="container">
+      <div class="notice-ticker-inner">
+        <span class="notice-ticker-label" aria-hidden="true">📢</span>
+        <div class="notice-ticker-viewport">
+          <div class="notice-ticker-track" id="notice-ticker-track"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <section class="section">
+      <div class="section-head">
+        <h2>🔥 Hot Deals</h2>
+        <a href="products.html" class="see-all">See More</a>
+      </div>
+      <div class="product-grid" data-products data-filter="featured" data-limit="8"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>⭐ Bestsellers</h2>
+        <a href="products.html" class="see-all">See More</a>
+      </div>
+      <div class="product-grid" data-products data-filter="bestseller" data-limit="8"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>👔 Men's Collection</h2>
+        <a href="category.html?c=mens-shirt" class="see-all">See More</a>
+      </div>
+      <div class="product-grid" data-products data-filter="mens-shirt" data-limit="4"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>👗 Women's Collection</h2>
+        <a href="category.html?c=womens-dress" class="see-all">See More</a>
+      </div>
+      <div class="product-grid" data-products data-filter="womens-dress" data-limit="4"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>🧒 Kids Collection</h2>
+        <a href="category.html?c=kids" class="see-all">See More</a>
+      </div>
+      <div class="product-grid" data-products data-filter="kids" data-limit="4"></div>
+    </section>
+
+    
+  </div>
+
+  <div data-include="partials/footer.html"></div>
+
+  <script src="assets/js/firebase-config.js"></script>
+  <script src="assets/js/products-loader.js"></script>
+  <script src="assets/js/bootstrap.js"></script>
+  <script src="assets/js/home.js"></script>
+</body>
+</html>

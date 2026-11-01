@@ -1,0 +1,48 @@
+{
+  "brand": {
+    "name": "Roseller",
+    "tagline": "Fashion That Fits Your Life",
+    "email": "support@roseller.com",
+    "phone": "+8801876757033",
+    "whatsapp": "8801876757033",
+    "address": "Dhaka, Bangladesh"
+  },
+  "categories": [
+    { "slug": "mens-shirt",   "name": "Men's Shirt",   "icon": "👔", "image": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=300&h=200&fit=crop&q=80" },
+    { "slug": "mens-pant",    "name": "Men's Pant",    "icon": "👖", "image": "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=300&h=200&fit=crop&q=80" },
+    { "slug": "mens-tshirt",  "name": "Men's T-Shirt", "icon": "👕", "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300&h=200&fit=crop&q=80" },
+    { "slug": "womens-dress", "name": "Women's Dress", "icon": "👗", "image": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=300&h=200&fit=crop&q=80" },
+    { "slug": "womens-kurti", "name": "Women's Kurti", "icon": "🥻", "image": "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=300&h=200&fit=crop&q=80" },
+    { "slug": "womens-saree", "name": "Women's Saree", "icon": "🧣", "image": "https://images.unsplash.com/photo-1610030469668-8e5b2c3a7b6e?w=300&h=200&fit=crop&q=80" },
+    { "slug": "kids",         "name": "Kids Wear",     "icon": "🧒", "image": "https://images.unsplash.com/photo-1519457431-44ccd64a579b?w=300&h=200&fit=crop&q=80" },
+    { "slug": "accessories",  "name": "Accessories",   "icon": "👜", "image": "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=300&h=200&fit=crop&q=80" }
+  ],
+  "brands": [
+    "Aarong",
+    "Yellow",
+    "Sailor",
+    "Ecstasy",
+    "Cats Eye",
+    "Easy",
+    "Dorjibari",
+    "Kay Kraft",
+    "Richman",
+    "Infinity"
+  ],
+  "payment_methods": [
+    "VISA",
+    "Mastercard",
+    "bKash",
+    "Nagad",
+    "Rocket",
+    "COD"
+  ],
+  "notices": [
+    "🎉 Free delivery on orders above ৳5,000 — anywhere in Bangladesh",
+    "🔥 New arrivals every Friday at 10 AM",
+    "💳 0% EMI available on all major credit cards",
+    "🚚 Cash on Delivery available in all 64 districts",
+    "⭐ 7-day easy return & exchange policy on all items",
+    "🎁 Eid Special: Up to 40% off on selected collections"
+  ]
+}

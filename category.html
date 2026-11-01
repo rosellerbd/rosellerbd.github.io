@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Category — Roseller</title>
+  <meta name="description" content="Shop fashion categories on Roseller — men's shirts, pants, t-shirts, women's dresses, kurtis, sarees, kids wear and accessories.">
+  <link rel="icon" type="image/png" sizes="64x64" href="images/roseller-logo-64x64-transparent.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="images/roseller-logo-128x128-transparent.png">
+  <link rel="apple-touch-icon" sizes="128x128" href="images/roseller-logo-128x128-transparent.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div data-include="partials/header.html"></div>
+
+  <div class="container">
+    <div class="page-head">
+      <nav class="breadcrumb">
+        <a href="index.html">Home</a><span class="crumb-sep">/</span>
+        <a href="products.html">Products</a><span class="crumb-sep">/</span>
+        <span class="crumb-current" id="category-crumb">Category</span>
+      </nav>
+      <h1 id="category-title">Category</h1>
+    </div>
+    <div class="product-grid" id="category-grid"></div>
+    <div style="height:40px"></div>
+  </div>
+
+  <div data-include="partials/footer.html"></div>
+
+  <script src="assets/js/firebase-config.js"></script>
+  <script src="assets/js/products-loader.js"></script>
+  <script src="assets/js/bootstrap.js"></script>
+  <script src="assets/js/category-page.js"></script>
+</body>
+</html>

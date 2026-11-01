@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>All Products — Roseller</title>
+  <meta name="description" content="Browse all fashion products on Roseller — men's shirts, pants, t-shirts, women's dresses, kurtis, sarees, kids wear and accessories.">
+  <link rel="icon" type="image/png" sizes="64x64" href="images/roseller-logo-64x64-transparent.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="images/roseller-logo-128x128-transparent.png">
+  <link rel="apple-touch-icon" sizes="128x128" href="images/roseller-logo-128x128-transparent.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div data-include="partials/header.html"></div>
+
+  <div class="container">
+    <div class="page-head">
+      <nav class="breadcrumb"><a href="index.html">Home</a><span class="crumb-sep">/</span><span class="crumb-current">All Products</span></nav>
+      <h1>All Products</h1>
+      <p class="page-sub" id="products-count">Loading…</p>
+    </div>
+
+    <div class="toolbar">
+      <div class="chips" id="filter-chips">
+        <button class="chip is-active" data-filter="all">All</button>
+        <button class="chip" data-filter="featured">Featured</button>
+        <button class="chip" data-filter="bestseller">Bestsellers</button>
+        <button class="chip" data-filter="mens-shirt">Men's Shirt</button>
+        <button class="chip" data-filter="mens-pant">Men's Pant</button>
+        <button class="chip" data-filter="mens-tshirt">Men's T-Shirt</button>
+        <button class="chip" data-filter="womens-dress">Women's Dress</button>
+        <button class="chip" data-filter="womens-kurti">Women's Kurti</button>
+        <button class="chip" data-filter="womens-saree">Women's Saree</button>
+        <button class="chip" data-filter="kids">Kids</button>
+        <button class="chip" data-filter="accessories">Accessories</button>
+      </div>
+      <select class="sort-select" id="sort-select">
+        <option value="default">Sort: Default</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+        <option value="name-asc">Name: A → Z</option>
+        <option value="name-desc">Name: Z → A</option>
+      </select>
+    </div>
+
+    <div class="product-grid" id="all-products-grid"></div>
+    <div class="products-empty hidden" id="products-empty">
+      <div class="empty-icon">👗</div>
+      <h2>No products found</h2>
+      <p>Try a different filter.</p>
+    </div>
+    <div style="height:40px"></div>
+  </div>
+
+  <div data-include="partials/footer.html"></div>
+
+  <script src="assets/js/firebase-config.js"></script>
+  <script src="assets/js/products-loader.js"></script>
+  <script src="assets/js/bootstrap.js"></script>
+  <script src="assets/js/products-page.js"></script>
+</body>
+</html>

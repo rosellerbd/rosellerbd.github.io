@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Track Order — Roseller</title>
+  <meta name="description" content="Track your order on Roseller by entering your order number.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="icon" type="image/png" sizes="64x64" href="images/roseller-logo-64x64-transparent.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="images/roseller-logo-128x128-transparent.png">
+  <link rel="apple-touch-icon" sizes="128x128" href="images/roseller-logo-128x128-transparent.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div data-include="partials/header.html"></div>
+
+  <div class="container">
+    <div class="page-head">
+      <nav class="breadcrumb">
+        <a href="index.html">Home</a><span class="crumb-sep">/</span>
+        <span class="crumb-current">Track Order</span>
+      </nav>
+      <h1>Track Your Order</h1>
+      <p class="page-sub">Enter your order number (e.g. RL-20261031-4821). You must be signed in with the same Google account used at checkout.</p>
+    </div>
+
+    <form id="track-form" class="toolbar" style="max-width:520px;">
+      <input id="track-input" type="text" placeholder="RL-YYYYMMDD-XXXX" autocomplete="off"
+             style="flex:1;padding:10px 14px;border:1px solid var(--line);border-radius:6px;font-size:14px;">
+      <button type="submit" class="btn-primary" style="margin-left:8px;">Track</button>
+    </form>
+
+    <div id="track-result" style="margin:16px 0 40px;"></div>
+  </div>
+
+  <div data-include="partials/footer.html"></div>
+
+  <script src="assets/js/firebase-config.js"></script>
+  <script src="data/products.js"></script>
+  <script src="assets/js/bootstrap.js"></script>
+  <script type="module" src="assets/js/track-order.js"></script>
+</body>
+</html>

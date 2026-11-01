@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Search — Roseller</title>
+  <meta name="robots" content="noindex, follow">
+  <meta name="description" content="Search products on Roseller — shirts, pants, kurtis, sarees, kids wear and accessories.">
+  <link rel="icon" type="image/png" sizes="64x64" href="images/roseller-logo-64x64-transparent.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="images/roseller-logo-128x128-transparent.png">
+  <link rel="apple-touch-icon" sizes="128x128" href="images/roseller-logo-128x128-transparent.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div data-include="partials/header.html"></div>
+
+  <div class="container">
+    <div class="page-head">
+      <nav class="breadcrumb">
+        <a href="index.html">Home</a><span class="crumb-sep">/</span>
+        <span class="crumb-current">Search</span>
+      </nav>
+      <h1>Search</h1>
+      <p class="page-sub" id="search-count">Type a keyword to search products.</p>
+    </div>
+
+    <div class="search-toolbar" id="search-toolbar">
+      <div class="search-toolbar-label">
+        Results for: <strong id="search-query-label">—</strong>
+      </div>
+      <a href="products.html" class="search-browse-link">Browse all products →</a>
+    </div>
+
+    <div class="product-grid" id="search-results-grid"></div>
+    <div class="products-empty hidden" id="search-empty"></div>
+
+    <div style="height:40px"></div>
+  </div>
+
+  <div data-include="partials/footer.html"></div>
+
+  <script src="assets/js/firebase-config.js"></script>
+  <script src="assets/js/products-loader.js"></script>
+  <script src="assets/js/bootstrap.js"></script>
+</body>
+</html>

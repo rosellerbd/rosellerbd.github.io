@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your Wishlist — Roseller</title>
+  <meta name="description" content="Items you've saved for later on Roseller.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="icon" type="image/png" sizes="64x64" href="images/roseller-logo-64x64-transparent.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="images/roseller-logo-128x128-transparent.png">
+  <link rel="apple-touch-icon" sizes="128x128" href="images/roseller-logo-128x128-transparent.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div data-include="partials/header.html"></div>
+
+  <div class="container">
+    <div class="page-head">
+      <nav class="breadcrumb">
+        <a href="index.html">Home</a><span class="crumb-sep">/</span>
+        <span class="crumb-current">Wishlist</span>
+      </nav>
+      <h1>Your Wishlist</h1>
+      <p class="page-sub" id="wishlist-summary-line">Your wishlist is empty.</p>
+    </div>
+
+    <div class="wishlist-layout">
+      <div class="product-grid" id="wishlist-grid"></div>
+
+      <div class="wishlist-empty-state hidden" id="wishlist-empty">
+        <div class="empty-icon">💝</div>
+        <h2>Your wishlist is empty</h2>
+        <p>Tap the heart on any product to save it for later.</p>
+        <a href="products.html" class="btn-primary">Browse Products</a>
+      </div>
+    </div>
+  </div>
+
+  <div data-include="partials/footer.html"></div>
+
+  <script src="assets/js/firebase-config.js"></script>
+  <script src="assets/js/products-loader.js"></script>
+  <script src="assets/js/bootstrap.js"></script>
+  <script type="module" src="assets/js/wishlist-page.js"></script>
+</body>
+</html>

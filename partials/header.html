@@ -1,0 +1,187 @@
+<header class="site-header">
+  <!-- TOP STRIP -->
+  <div class="top-strip">
+    <div class="container top-strip-inner">
+      <div class="top-left">
+        <span class="top-item">📞 <span data-phone-text>+880 1876-757033</span></span>
+        <span class="top-item top-hide-sm">🏬 Connecting Markets, Creating Opportunities</span>
+      </div>
+      <div class="top-right">
+        <a href="products.html" class="top-link">Offers</a>
+        <a href="track-order.html" class="top-link">Track Order</a>
+        <a href="products.html" class="top-link top-hide-sm">Blog</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN BAR -->
+  <div class="main-bar">
+    <div class="container main-bar-inner">
+      <a href="index.html" class="logo" aria-label="Roseller Home">
+        <img
+          src="images/roseller-logo-256x256-transparent.png"
+          alt="Roseller"
+          class="logo-img"
+          width="44"
+          height="44"
+          fetchpriority="high">
+        <span class="logo-text">Roseller<span class="logo-dot"></span></span>
+      </a>
+
+      <!-- SEARCH FORM -->
+      <form id="search-form" class="search-form" role="search" autocomplete="off">
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search for shirts, sarees, kurtis and more…"
+          aria-label="Search products"
+          aria-autocomplete="list"
+          aria-controls="search-suggestions">
+        <button type="submit" class="search-btn" aria-label="Search">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+            <circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </button>
+        <div class="search-suggestions" id="search-suggestions" hidden></div>
+      </form>
+
+      <div class="header-actions">
+        <!-- AUTH WIDGET -->
+        <div class="auth-widget" id="auth-widget">
+          <!-- Logged out -->
+          <button type="button" class="header-action auth-login-btn" id="auth-login-btn" aria-label="Sign In">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="8" r="4"/>
+              <path d="M4 21c0-4 4-7 8-7s8 3 8 7"/>
+            </svg>
+            <span class="ha-text">Sign In</span>
+          </button>
+
+          <!-- Logged in -->
+          <div class="auth-user hidden" id="auth-user">
+            <button type="button" class="header-action auth-user-btn" id="auth-user-btn" aria-label="Account menu" aria-expanded="false">
+              <img id="auth-avatar" class="auth-avatar" src="" alt="" width="26" height="26">
+              <span class="ha-text auth-name" id="auth-name">Account</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </button>
+
+            <div class="auth-dropdown hidden" id="auth-dropdown" role="menu">
+              <div class="auth-dropdown-header">
+                <img id="auth-dd-avatar" class="auth-dd-avatar" src="" alt="" width="40" height="40">
+                <div class="auth-dd-info">
+                  <strong id="auth-dd-name">User</strong>
+                  <span id="auth-dd-email">email</span>
+                </div>
+              </div>
+
+              <a href="dashboard.html" role="menuitem" class="auth-dropdown-item">
+                <span class="auth-dd-icon">👤</span>
+                <span class="auth-dd-label">My Account</span>
+              </a>
+
+              <a href="dashboard.html#orders" role="menuitem" class="auth-dropdown-item">
+                <span class="auth-dd-icon">📦</span>
+                <span class="auth-dd-label">My Orders</span>
+                <span class="auth-dd-badge" id="auth-dd-orders-count" hidden>0</span>
+              </a>
+
+              <a href="wishlist.html" role="menuitem" class="auth-dropdown-item">
+                <span class="auth-dd-icon">💝</span>
+                <span class="auth-dd-label">Wishlist</span>
+                <span class="auth-dd-badge" id="auth-dd-wishlist-count" hidden>0</span>
+              </a>
+
+              <a href="cart.html" role="menuitem" class="auth-dropdown-item">
+                <span class="auth-dd-icon">🛒</span>
+                <span class="auth-dd-label">My Cart</span>
+                <span class="auth-dd-badge" id="auth-dd-cart-count" hidden>0</span>
+              </a>
+
+              <div class="auth-dropdown-divider"></div>
+
+              <button type="button" id="auth-signout" role="menuitem" class="auth-dropdown-item auth-signout">
+                <span class="auth-dd-icon">↪</span>
+                <span class="auth-dd-label">Sign Out</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <a href="wishlist.html" class="header-action wishlist-action" aria-label="Wishlist">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+          <span class="wishlist-count" id="wishlist-count">0</span>
+          <span class="ha-text">Wishlist</span>
+        </a>
+
+        <div class="cart-wrap">
+          <a href="cart.html" class="header-action cart-action" aria-label="Cart">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="9" cy="21" r="1"/>
+              <circle cx="20" cy="21" r="1"/>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+            </svg>
+            <span class="cart-count" id="cart-count">0</span>
+            <span class="ha-text">Cart</span>
+          </a>
+          <div class="cart-preview" role="dialog" aria-label="Cart preview">
+            <div class="cart-preview-head"><strong>Your Cart</strong><span id="cart-preview-count">0 items</span></div>
+            <div class="cart-preview-body" id="cart-preview-items">
+              <p class="cart-empty">Your cart is empty.</p>
+            </div>
+            <div class="cart-preview-foot">
+              <a class="btn-checkout" href="checkout.html">Checkout</a>
+              <a href="cart.html" class="cart-view-link">View full cart</a>
+            </div>
+          </div>
+        </div>
+
+        <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Menu" aria-expanded="false">☰</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORY NAV -->
+  <nav class="cat-nav">
+    <div class="container cat-nav-inner">
+      <a href="products.html" class="cat-link cat-link--all">
+        <span class="hamb">☰</span> ALL CATEGORIES
+      </a>
+      <a href="category.html?c=mens-shirt"   class="cat-link">Men's Shirt</a>
+      <a href="category.html?c=mens-pant"    class="cat-link">Men's Pant</a>
+      <a href="category.html?c=mens-tshirt"  class="cat-link">Men's T-Shirt</a>
+      <a href="category.html?c=womens-dress" class="cat-link">Women's Dress</a>
+      <a href="category.html?c=womens-kurti" class="cat-link">Women's Kurti</a>
+      <a href="category.html?c=womens-saree" class="cat-link">Women's Saree</a>
+      <a href="category.html?c=kids"         class="cat-link">Kids</a>
+      <a href="category.html?c=accessories"  class="cat-link">Accessories</a>
+      <a href="products.html" class="cat-link cat-link--accent">New Arrivals</a>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div id="mobile-menu" class="mobile-menu hidden">
+    <a href="index.html">Home</a>
+    <a href="products.html">All Products</a>
+    <details class="mobile-cat">
+      <summary>Categories ▾</summary>
+      <a href="category.html?c=mens-shirt">Men's Shirt</a>
+      <a href="category.html?c=mens-pant">Men's Pant</a>
+      <a href="category.html?c=mens-tshirt">Men's T-Shirt</a>
+      <a href="category.html?c=womens-dress">Women's Dress</a>
+      <a href="category.html?c=womens-kurti">Women's Kurti</a>
+      <a href="category.html?c=womens-saree">Women's Saree</a>
+      <a href="category.html?c=kids">Kids</a>
+      <a href="category.html?c=accessories">Accessories</a>
+    </details>
+    <a href="dashboard.html" class="wa-mobile" id="mobile-auth-link">👤 Sign In</a>
+    <a href="wishlist.html">Wishlist (<span id="wishlist-count-mobile">0</span>)</a>
+    <a href="cart.html">Cart (<span id="cart-count-mobile">0</span>)</a>
+    <a href="track-order.html">📦 Track Order</a>
+    <a href="https://wa.me/8801876757033" data-wa-link data-wa-message="Hi Roseller, I need help." target="_blank" rel="noopener" class="wa-mobile">💬 Contact on WhatsApp</a>
+  </div>
+</header>

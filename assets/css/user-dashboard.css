@@ -1,0 +1,331 @@
+/* ============================================================
+   Roseller — user dashboard
+   ============================================================ */
+
+.user-dash {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 24px;
+  max-width: 1320px;
+  margin: 24px auto 60px;
+  padding: 0 12px;
+  align-items: start;
+}
+
+/* ---------- Sidebar ---------- */
+.ud-sidebar {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 20px 0;
+  position: sticky;
+  top: 160px;
+  overflow: hidden;
+}
+
+.ud-user {
+  padding: 0 20px 20px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+}
+.ud-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 22px;
+  overflow: hidden;
+}
+.ud-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.ud-user h3 { font-size: 14px; font-weight: 700; margin: 6px 0 0; color: var(--ink); }
+.ud-user span { font-size: 11.5px; color: var(--muted); word-break: break-all; }
+
+.ud-nav { padding: 12px 0; }
+.ud-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 20px;
+  color: var(--ink);
+  font-size: 13.5px;
+  font-weight: 500;
+  background: none;
+  border: none;
+  border-left: 3px solid transparent;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background .15s, color .15s, border-color .15s;
+}
+.ud-nav-item:hover { background: #f9fafb; }
+.ud-nav-item.is-active {
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  border-left-color: var(--primary);
+  font-weight: 600;
+}
+.ud-nav-icon { font-size: 16px; width: 20px; text-align: center; }
+
+.ud-sidebar-foot {
+  padding: 12px 20px 0;
+  border-top: 1px solid var(--line);
+}
+.ud-signout {
+  background: #fff;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  width: 100%;
+  cursor: pointer;
+  font-family: inherit;
+}
+.ud-signout:hover { border-color: var(--primary); color: var(--primary); }
+
+/* ---------- Main content ---------- */
+.ud-content { min-width: 0; }
+.ud-head { margin-bottom: 20px; }
+.ud-head h1 { font-size: 22px; font-weight: 800; margin: 0 0 4px; letter-spacing: -0.3px; }
+.ud-head p { font-size: 13px; color: var(--muted); margin: 0; }
+
+.ud-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 14px;
+}
+
+/* ---------- Empty states ---------- */
+.ud-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--muted);
+}
+.ud-empty-icon { font-size: 48px; opacity: 0.5; margin-bottom: 10px; }
+.ud-empty h2 { font-size: 16px; color: var(--ink); margin: 0 0 6px; }
+.ud-empty p { font-size: 13px; margin: 0 0 16px; }
+
+/* ---------- Profile ---------- */
+.ud-profile-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.ud-field { display: flex; flex-direction: column; gap: 4px; }
+.ud-field label {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+.ud-field input,
+.ud-field textarea {
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-family: inherit;
+  color: var(--ink);
+  background: #fff;
+}
+.ud-field input:focus,
+.ud-field textarea:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+  border-color: var(--primary);
+}
+.ud-field input:disabled {
+  background: #f9fafb;
+  color: var(--muted);
+  cursor: not-allowed;
+}
+.ud-save-btn {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 14px;
+}
+.ud-save-btn:hover { background: var(--primary-dark); }
+.ud-save-btn:disabled { opacity: 0.6; cursor: wait; }
+
+/* ---------- Order cards ---------- */
+.ud-order {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.ud-order-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.ud-order-num { font-weight: 800; font-size: 14px; color: var(--ink); }
+.ud-order-date { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.ud-order-total { font-size: 16px; font-weight: 800; color: var(--primary); }
+.ud-order-meta { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+.ud-order-items {
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ud-order-item {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 12.5px;
+}
+.ud-order-item img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  flex-shrink: 0;
+}
+.ud-order-item-name { flex: 1; }
+.ud-order-item-qty { color: var(--muted); font-size: 11.5px; }
+.ud-order-actions { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
+.ud-btn-sm {
+  padding: 7px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  text-decoration: none;
+}
+.ud-btn-primary { background: var(--primary); color: #fff; border: none; }
+.ud-btn-primary:hover { background: var(--primary-dark); }
+.ud-btn-outline { background: #fff; color: var(--ink); border: 1px solid var(--line); }
+.ud-btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+
+/* ---------- Badges ---------- */
+.ud-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+.ud-badge-pending   { background: #fef3c7; color: #92400e; }
+.ud-badge-confirmed { background: #dbeafe; color: #1e40af; }
+.ud-badge-shipped   { background: #e0e7ff; color: #3730a3; }
+.ud-badge-delivered { background: #d1fae5; color: #065f46; }
+.ud-badge-cancelled { background: #fee2e2; color: #991b1b; }
+
+/* ---------- Cart / Wishlist lists ---------- */
+.ud-list-item {
+  display: grid;
+  grid-template-columns: 70px 1fr auto;
+  gap: 14px;
+  align-items: center;
+  padding: 14px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+.ud-list-item img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: #fafafa;
+}
+.ud-list-info { min-width: 0; }
+.ud-list-title { font-size: 13.5px; font-weight: 600; color: var(--ink); text-decoration: none; display: block; }
+.ud-list-title:hover { color: var(--primary); }
+.ud-list-price { font-size: 14px; font-weight: 800; color: var(--primary); margin-top: 4px; }
+
+.ud-qty {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+  height: 32px;
+  margin-top: 8px;
+}
+.ud-qty button {
+  width: 30px;
+  height: 100%;
+  background: #f9fafb;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: inherit;
+}
+.ud-qty button:hover { background: var(--primary-light); color: var(--primary-dark); }
+.ud-qty span {
+  padding: 0 10px;
+  font-size: 12.5px;
+  font-weight: 700;
+  min-width: 34px;
+  text-align: center;
+}
+
+.ud-list-actions { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
+.ud-remove {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 12px;
+  cursor: pointer;
+  text-decoration: underline;
+  font-family: inherit;
+  padding: 4px 0;
+}
+.ud-remove:hover { color: var(--primary); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .user-dash { grid-template-columns: 1fr; gap: 16px; }
+  .ud-sidebar { position: static; }
+  .ud-nav { display: flex; overflow-x: auto; padding: 8px; gap: 4px; scrollbar-width: none; }
+  .ud-nav::-webkit-scrollbar { display: none; }
+  .ud-nav-item {
+    flex-direction: column;
+    gap: 4px;
+    padding: 10px 14px;
+    white-space: nowrap;
+    border-left: none;
+    border-bottom: 3px solid transparent;
+    min-width: 72px;
+    text-align: center;
+    font-size: 11px;
+  }
+  .ud-nav-item.is-active { border-left: none; border-bottom-color: var(--primary); background: var(--primary-light); }
+  .ud-user { padding: 12px 16px; flex-direction: row; text-align: left; }
+  .ud-avatar { width: 40px; height: 40px; font-size: 16px; }
+  .ud-profile-grid { grid-template-columns: 1fr; }
+  .ud-list-item { grid-template-columns: 60px 1fr; }
+  .ud-list-item img { width: 60px; height: 60px; }
+  .ud-list-actions { grid-column: 1 / -1; flex-direction: row; justify-content: flex-end; }
+}

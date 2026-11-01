@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Order Placed — Roseller</title>
+  <meta name="description" content="Your order has been placed on Roseller.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="icon" type="image/png" sizes="64x64" href="images/roseller-logo-64x64-transparent.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="images/roseller-logo-128x128-transparent.png">
+  <link rel="apple-touch-icon" sizes="128x128" href="images/roseller-logo-128x128-transparent.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div data-include="partials/header.html"></div>
+
+  <div class="container">
+    <div class="page-head">
+      <nav class="breadcrumb">
+        <a href="index.html">Home</a><span class="crumb-sep">/</span>
+        <span class="crumb-current">Order Placed</span>
+      </nav>
+      <h1>Order Placed</h1>
+    </div>
+
+    <section class="checkout-success" style="background:#fff;border:1px solid var(--line);border-radius:8px;max-width:640px;margin:0 auto 40px;padding:36px 24px;text-align:center;">
+      <div class="success-icon">✓</div>
+      <h3 style="margin:16px 0 8px;font-size:22px;">Thank you for your order!</h3>
+      <p style="color:var(--muted);font-size:14px;margin:0 0 10px;">We've received your order and will contact you shortly to confirm delivery.</p>
+
+      <div style="background:#f5f5f5;border-radius:8px;padding:14px 20px;margin:18px auto;max-width:340px;">
+        <div style="font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;font-weight:600;">Order number</div>
+        <div id="order-number-display" style="font-size:20px;font-weight:800;color:var(--primary);font-family:ui-monospace,monospace;margin-top:4px;letter-spacing:0.5px;">—</div>
+      </div>
+
+      <p style="color:var(--muted);font-size:12.5px;margin:0 0 20px;">
+        Keep this number safe. You'll need it to track your order.
+      </p>
+
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <a href="track-order.html" class="btn-primary">Track Order</a>
+        <a href="products.html" class="btn-secondary">Continue Shopping</a>
+      </div>
+    </section>
+
+    <div style="max-width:640px;margin:0 auto 40px;text-align:center;">
+      <p style="color:var(--muted);font-size:13px;">
+        Need help? <a href="https://wa.me/8801876757033" data-wa-link data-wa-message="Hi Roseller, I just placed an order and need help." target="_blank" rel="noopener" style="color:var(--primary);font-weight:600;text-decoration:none;">Message us on WhatsApp</a>
+      </p>
+    </div>
+  </div>
+
+  <div data-include="partials/footer.html"></div>
+
+  <script src="assets/js/firebase-config.js"></script>
+  <script src="data/products.js"></script>
+  <script src="assets/js/bootstrap.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const num = new URLSearchParams(location.search).get('order') || '—';
+      const el = document.getElementById('order-number-display');
+      if (el) el.textContent = num;
+    });
+  </script>
+</body>
+</html>
