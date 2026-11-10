@@ -31,6 +31,17 @@ button { font-family: inherit; }
   --whatsapp:      #25d366;
   --blue-glow:     #4fc3f7;
   --blue-glow-rgb: 79, 195, 247;
+
+  /* Sticky header height per breakpoint — used by search-toolbar,
+     cart-summary, and auth-dropdown. Keep these in sync with
+     the .main-bar-inner heights below. */
+  --header-h: 150px;
+}
+@media (max-width: 900px) {
+  :root { --header-h: 130px; }
+}
+@media (max-width: 768px) {
+  :root { --header-h: 116px; }
 }
 
 ::selection { background: var(--primary); color: #fff; }
@@ -501,7 +512,7 @@ button { font-family: inherit; }
   border: 1px solid var(--line);
   border-radius: 8px; padding: 12px 16px;
   margin: 16px 0; font-size: 13.5px;
-  position: sticky; top: 150px;
+  position: sticky; top: var(--header-h);
   z-index: 40;
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
@@ -517,9 +528,8 @@ button { font-family: inherit; }
 }
 .search-browse-link:hover { text-decoration: underline; }
 
-@media (max-width: 900px) { .search-toolbar { top: 130px; } }
 @media (max-width: 768px) {
-  .search-toolbar { top: 96px; position: static; backdrop-filter: none; }
+  .search-toolbar { top: auto; position: static; backdrop-filter: none; }
   .search-suggestions { max-height: 320px; border-radius: 8px; }
   .ss-img { width: 40px; height: 40px; }
   .ss-name { font-size: 12.5px; }
@@ -828,7 +838,7 @@ button { font-family: inherit; }
 }
 .remove-btn:hover { color: var(--primary); border-color: var(--primary); }
 
-.cart-summary-col { position: sticky; top: 160px; }
+.cart-summary-col { position: sticky; top: calc(var(--header-h) + 10px); }
 .cart-summary {
   background: #fff; border: 1px solid var(--line); border-radius: 8px;
   padding: 18px; display: flex; flex-direction: column; gap: 12px;
@@ -1166,8 +1176,32 @@ button { font-family: inherit; }
   .logo-text { font-size: 18px; }
   .logo-img { width: 34px; height: 34px; }
   .header-actions { grid-area: icons; justify-self: end; gap: 0; }
-  .header-actions .header-action:not(.cart-action):not(.wishlist-action) { display: none; }
+  /* Keep auth widget + cart + wishlist + hamburger visible; hide only ancillary actions */
+  .header-actions .header-action:not(.cart-action):not(.wishlist-action):not(.auth-login-btn):not(.auth-user-btn) { display: none; }
+  /* Auth widget must remain visible — put it first in visual order */
+  /* Natural DOM order: avatar → wishlist → cart → ☰.
+     No row-reverse, no order overrides — future HTML edits stay intuitive. */
+  .header-actions { gap: 2px; }
   .ha-text { display: none; }
+  .header-action { padding: 8px; }
+  /* Compact avatar on mobile */
+  .auth-avatar { width: 28px; height: 28px; }
+  .auth-user-btn svg { display: none; } /* hide chevron, saves ~14px */
+  .auth-login-btn svg { width: 20px; height: 20px; }
+  /* Logged-out: give the login button a visible pill so it's obviously tappable */
+  .auth-login-btn {
+    background: rgba(229, 57, 53, 0.9);
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 999px;
+    min-height: 36px;
+    gap: 6px;
+  }
+  /* :hover only when the device actually supports it (desktop previews,
+     iPad with trackpad, etc.) — avoids sticky-hover flicker on phones */
+  @media (hover: hover) {
+    .auth-login-btn:hover { background: var(--primary-dark); }
+  }
   .search-form {
     grid-area: search;
     max-width: 100%;
@@ -1467,7 +1501,7 @@ button { font-family: inherit; }
 .auth-avatar {
   border-radius: 50%;
   object-fit: cover;
-  background: rgba(255,255,255,0.15);
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
   border: 1px solid rgba(255,255,255,0.3);
   flex-shrink: 0;
 }
@@ -1630,8 +1664,31 @@ button { font-family: inherit; }
 
 @media (max-width: 768px) {
   .auth-name { display: none; }
-  .auth-dropdown { right: -8px; min-width: 220px; }
+  .auth-dropdown {
+    /* Pin below the sticky mobile header, anchored to viewport right.
+       `--header-h` is defined in :root and stays in sync with the
+       media-query header heights. */
+    position: fixed;
+    top: var(--header-h);
+    right: 12px;
+    left: auto;
+    min-width: 0;
+    width: calc(100vw - 24px);
+    max-width: 320px;
+    max-height: calc(100vh - var(--header-h) - 20px);
+    overflow-y: auto;
+    margin-top: 0;
+  }
+  /* Desktop-only hover bridge — remove on touch, it blocks the first menu tap */
+  .auth-dropdown::before { display: none; }
   .auth-user-btn .ha-text { display: none; }
+  /* Icon tap target: 40px min for WCAG 2.5.5 */
+  .auth-user-btn,
+  .auth-login-btn {
+    min-height: 40px;
+    min-width: 40px;
+    justify-content: center;
+  }
 }
 
 /* ============================================================

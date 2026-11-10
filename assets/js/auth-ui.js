@@ -1,10 +1,32 @@
 // ============================================================
-// Roseller — auth-ui.js (v3, hover + click + badges)
+// Roseller — auth-ui.js (v4)
+// Hover + click + badges + SVG avatar fallback
 // ============================================================
 (function () {
   'use strict';
 
   const $ = id => document.getElementById(id);
+
+  /* ============================================================
+     AVATAR FALLBACK
+     Build a red-circle SVG data-URI with the user's initial.
+     Avoids the broken-image icon that <img> shows when src is
+     empty or removed.
+     ============================================================ */
+  function avatarFallback(letter) {
+    const safe = (letter || '?').replace(/[<>&"']/g, '').slice(0, 2);
+    const svg =
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">' +
+        '<circle cx="20" cy="20" r="20" fill="#e53935"/>' +
+        '<text x="50%" y="54%" text-anchor="middle" ' +
+              'dominant-baseline="middle" ' +
+              'font-family="Inter, -apple-system, sans-serif" ' +
+              'font-size="18" font-weight="700" fill="#ffffff">' +
+          safe +
+        '</text>' +
+      '</svg>';
+    return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+  }
 
   /* ============================================================
      APPLY AUTH STATE
@@ -21,31 +43,56 @@
 
     if (!loginBtn || !userBox) return;
 
+    /* ---------- LOGGED OUT ---------- */
     if (!user) {
       loginBtn.classList.remove('hidden');
       userBox.classList.add('hidden');
-      if (mobileLink) { mobileLink.textContent = '👤 Sign In'; mobileLink.href = 'dashboard.html'; }
+
+      if (mobileLink) {
+        mobileLink.textContent = '👤 Sign In';
+        mobileLink.href = 'dashboard.html';
+      }
+
       hideBadge('auth-dd-orders-count');
       hideBadge('auth-dd-wishlist-count');
       hideBadge('auth-dd-cart-count');
+
+      // Also clear the avatar src so next login starts fresh
+      if (avatar)   { avatar.removeAttribute('src'); avatar.alt = ''; }
+      if (ddAvatar) { ddAvatar.removeAttribute('src'); ddAvatar.alt = ''; }
+
       return;
     }
 
+    /* ---------- LOGGED IN ---------- */
     loginBtn.classList.add('hidden');
     userBox.classList.remove('hidden');
 
     const displayName = user.displayName || user.email || 'Account';
-    if (avatar)   avatar.src = user.photoURL || '';
-    if (ddAvatar) ddAvatar.src = user.photoURL || '';
-    if (nameEl)   nameEl.textContent = displayName.split(' ')[0];
-    if (ddName)   ddName.textContent = displayName;
-    if (ddEmail)  ddEmail.textContent = user.email || '';
+    const initial     = displayName.trim().charAt(0).toUpperCase();
+    const photo       = user.photoURL || '';
+    const fallback    = avatarFallback(initial);
 
+    if (avatar) {
+      avatar.src = photo || fallback;
+      avatar.alt = displayName;
+    }
+    if (ddAvatar) {
+      ddAvatar.src = photo || fallback;
+      ddAvatar.alt = displayName;
+    }
+    if (nameEl)  nameEl.textContent = displayName.split(' ')[0];
+    if (ddName)  ddName.textContent = displayName;
+    if (ddEmail) ddEmail.textContent = user.email || '';
+
+    // Update the mobile menu link BEFORE any awaits so it is
+    // correct even if the Supabase badge fetches below fail or hang.
     if (mobileLink) {
       mobileLink.textContent = `👤 ${displayName.split(' ')[0]}`;
       mobileLink.href = 'dashboard.html';
     }
 
+    /* ---------- BADGES (Supabase) ---------- */
     if (!window.RosellerSupabase) return;
     const sb = window.RosellerSupabase;
 
@@ -56,20 +103,29 @@
         ['pending', 'confirmed', 'shipped'].includes(o.status)
       ).length;
       setBadge('auth-dd-orders-count', open);
-    } catch (e) { console.warn('[auth-ui] orders', e); hideBadge('auth-dd-orders-count'); }
+    } catch (e) {
+      console.warn('[auth-ui] orders', e);
+      hideBadge('auth-dd-orders-count');
+    }
 
     try {
       const { data: wl } = await sb
         .from('wishlists').select('id').eq('user_id', user.uid);
       setBadge('auth-dd-wishlist-count', (wl || []).length);
-    } catch (e) { console.warn('[auth-ui] wishlist', e); hideBadge('auth-dd-wishlist-count'); }
+    } catch (e) {
+      console.warn('[auth-ui] wishlist', e);
+      hideBadge('auth-dd-wishlist-count');
+    }
 
     try {
       const { data: cart } = await sb
         .from('carts').select('qty').eq('user_id', user.uid);
-      const totalQty = (cart || []).reduce((s, r) => s + r.qty, 0);
+      const totalQty = (cart || []).reduce((s, r) => s + (r.qty || 0), 0);
       setBadge('auth-dd-cart-count', totalQty);
-    } catch (e) { console.warn('[auth-ui] cart', e); hideBadge('auth-dd-cart-count'); }
+    } catch (e) {
+      console.warn('[auth-ui] cart', e);
+      hideBadge('auth-dd-cart-count');
+    }
   }
 
   function setBadge(id, n) {
@@ -90,14 +146,14 @@
   function openDropdown() {
     const dd  = $('auth-dropdown');
     const btn = $('auth-user-btn');
-    if (dd) dd.classList.remove('hidden');
+    if (dd)  dd.classList.remove('hidden');
     if (btn) btn.setAttribute('aria-expanded', 'true');
   }
 
   function closeDropdown() {
     const dd  = $('auth-dropdown');
     const btn = $('auth-user-btn');
-    if (dd) dd.classList.add('hidden');
+    if (dd)  dd.classList.add('hidden');
     if (btn) btn.setAttribute('aria-expanded', 'false');
   }
 
@@ -130,23 +186,46 @@
       };
     }
 
-    /* Hover opens; leaving closes (with a small delay so moving into the menu works) */
+    /* Hover opens on devices that actually have hover (desktop mice).
+       On touch devices, ONLY click toggles — otherwise mouseenter on tap
+       opens the menu, then the click handler immediately closes it. */
     if (widget && !widget.dataset.hoverWired) {
       widget.dataset.hoverWired = '1';
 
-      let hideTimer = null;
+      const canHover =
+        typeof window.matchMedia === 'function' &&
+        window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-      widget.addEventListener('mouseenter', () => {
-        if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
-        openDropdown();
-      });
+      if (canHover) {
+        let hideTimer = null;
 
-      widget.addEventListener('mouseleave', () => {
-        if (hideTimer) clearTimeout(hideTimer);
-        hideTimer = setTimeout(() => {
-          closeDropdown();
-          hideTimer = null;
-        }, 250);
+        widget.addEventListener('mouseenter', () => {
+          if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
+          openDropdown();
+        });
+
+        widget.addEventListener('mouseleave', () => {
+          if (hideTimer) clearTimeout(hideTimer);
+          hideTimer = setTimeout(() => {
+            closeDropdown();
+            hideTimer = null;
+          }, 250);
+        });
+      }
+    }
+
+    /* Escape closes the dropdown */
+    if (!document.body.dataset.authEscapeWired) {
+      document.body.dataset.authEscapeWired = '1';
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          const dd = $('auth-dropdown');
+          if (dd && !dd.classList.contains('hidden')) {
+            closeDropdown();
+            const btn = $('auth-user-btn');
+            if (btn && typeof btn.focus === 'function') btn.focus();
+          }
+        }
       });
     }
 
@@ -164,8 +243,9 @@
     if (!document.body.dataset.authOutsideWired) {
       document.body.dataset.authOutsideWired = '1';
       document.addEventListener('click', (e) => {
-        if (!widget) return;
-        if (!widget.contains(e.target)) closeDropdown();
+        const w = $('auth-widget');
+        if (!w) return;
+        if (!w.contains(e.target)) closeDropdown();
       });
     }
 
@@ -180,14 +260,29 @@
   }
 
   /* ============================================================
-     BOOT
+     BOOT — idempotent
+     DOMContentLoaded and partials:loaded can both call boot().
+     Both the auth:changed listener and the onReady handler must
+     run exactly once, or applyAuth fires multiple times and
+     multiplies Supabase queries.
      ============================================================ */
+  let _booted          = false;
+  let _authChangedBound = false;
+
   function boot() {
     wireEvents();
-    if (window.RosellerAuth) {
-      window.RosellerAuth.onReady(user => applyAuth(user));
+
+    if (!_authChangedBound) {
+      _authChangedBound = true;
+      document.addEventListener('auth:changed', (e) => {
+        applyAuth(e && e.detail ? e.detail.user : null);
+      });
     }
-    document.addEventListener('auth:changed', e => applyAuth(e.detail.user));
+
+    if (!_booted && window.RosellerAuth) {
+      _booted = true;
+      window.RosellerAuth.onReady((user) => applyAuth(user));
+    }
   }
 
   if (document.readyState === 'loading') {
