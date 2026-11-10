@@ -1162,46 +1162,101 @@ button { font-family: inherit; }
 }
 
 @media (max-width: 768px) {
-  /* Mobile header: logo + icons row, search below */
+  /* ==================================================
+     Mobile header — row 1: [☰] [logo] …… [auth] [♡] [🛒]
+     Row 2: full-width search.
+     ☰ lives on the far LEFT; auth shows TEXT next to icon.
+     ================================================== */
   .main-bar-inner {
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto auto 1fr auto;
     grid-template-areas:
-      "logo  .   icons"
-      "search search search";
+      "menu  logo  .  icons"
+      "search search search search";
     gap: 8px; height: auto;
     padding: 10px 0;
+    align-items: center;
   }
-  .logo { grid-area: logo; }
+
+  /* ☰ on the far left, thumb-friendly 40×40 target */
+  #mobile-menu-btn {
+    grid-area: menu;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: none;
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    font-size: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background .15s;
+    flex-shrink: 0;
+  }
+  #mobile-menu-btn:hover,
+  #mobile-menu-btn[aria-expanded="true"] {
+    background: rgba(255,255,255,0.16);
+  }
+
+  .logo { grid-area: logo; justify-self: start; }
   .logo-text { font-size: 18px; }
   .logo-img { width: 34px; height: 34px; }
-  .header-actions { grid-area: icons; justify-self: end; gap: 0; }
-  /* Keep auth widget + cart + wishlist + hamburger visible; hide only ancillary actions */
+
+  /* Right cluster: auth + wishlist + cart (NO hamburger here anymore) */
+  .header-actions {
+    grid-area: icons;
+    justify-self: end;
+    gap: 2px;
+    align-items: center;
+  }
   .header-actions .header-action:not(.cart-action):not(.wishlist-action):not(.auth-login-btn):not(.auth-user-btn) { display: none; }
-  /* Auth widget must remain visible — put it first in visual order */
-  /* Natural DOM order: avatar → wishlist → cart → ☰.
-     No row-reverse, no order overrides — future HTML edits stay intuitive. */
-  .header-actions { gap: 2px; }
-  .ha-text { display: none; }
+
   .header-action { padding: 8px; }
-  /* Compact avatar on mobile */
-  .auth-avatar { width: 28px; height: 28px; }
-  .auth-user-btn svg { display: none; } /* hide chevron, saves ~14px */
-  .auth-login-btn svg { width: 20px; height: 20px; }
-  /* Logged-out: give the login button a visible pill so it's obviously tappable */
+  .ha-text { display: none; }
+
+  /* ---------- AUTH: text + icon visible on mobile ---------- */
+  .auth-avatar { width: 26px; height: 26px; }
+  .auth-user-btn svg { display: none; }        /* chevron hidden — saves space */
+
+  /* Logged out: red pill with icon + "Sign In" text */
   .auth-login-btn {
-    background: rgba(229, 57, 53, 0.9);
+    background: rgba(229, 57, 53, 0.95);
     color: #fff;
-    padding: 8px 12px;
+    padding: 7px 12px;
     border-radius: 999px;
     min-height: 36px;
     gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
   }
-  /* :hover only when the device actually supports it (desktop previews,
-     iPad with trackpad, etc.) — avoids sticky-hover flicker on phones */
   @media (hover: hover) {
     .auth-login-btn:hover { background: var(--primary-dark); }
   }
+  .auth-login-btn svg { width: 18px; height: 18px; }
+
+  /* Logged in: avatar + FIRST NAME (matches desktop style) */
+  .auth-user-btn {
+    padding: 6px 10px 6px 6px;
+    gap: 6px;
+    border-radius: 999px;
+  }
+  .auth-name {
+    display: inline-block;
+    max-width: 72px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  /* Wishlist + Cart stay icon-only */
+  .wishlist-action .ha-text,
+  .cart-action .ha-text { display: none; }
+
   .search-form {
     grid-area: search;
     max-width: 100%;
@@ -1210,7 +1265,6 @@ button { font-family: inherit; }
     min-width: 0;
   }
   .search-input { font-size: 13px; padding: 0 14px; }
-  .mobile-menu-btn { display: flex; }
 
   /* Simplified top-strip hiding */
   .top-item + .top-item { display: none; }
@@ -1663,7 +1717,10 @@ button { font-family: inherit; }
 }
 
 @media (max-width: 768px) {
-  .auth-name { display: none; }
+  /* NOTE: .auth-name is intentionally NOT hidden here — the whole point
+     of the mobile redesign is to show the user's first name next to
+     the avatar. See the main mobile-header block above. */
+
   .auth-dropdown {
     /* Pin below the sticky mobile header, anchored to viewport right.
        `--header-h` is defined in :root and stays in sync with the
@@ -1681,12 +1738,10 @@ button { font-family: inherit; }
   }
   /* Desktop-only hover bridge — remove on touch, it blocks the first menu tap */
   .auth-dropdown::before { display: none; }
-  .auth-user-btn .ha-text { display: none; }
   /* Icon tap target: 40px min for WCAG 2.5.5 */
   .auth-user-btn,
   .auth-login-btn {
     min-height: 40px;
-    min-width: 40px;
     justify-content: center;
   }
 }
@@ -2095,4 +2150,16 @@ button { font-family: inherit; }
   font-weight: 700 !important;
   font-size: 13px !important;
   line-height: 1 !important;
+}
+
+/* ============================================================
+   EXTRA-NARROW PHONES (iPhone SE 1st gen, Galaxy J2, etc.)
+   Below 380px, drop the logo wordmark to free horizontal space
+   ============================================================ */
+@media (max-width: 380px) {
+  .logo-text { display: none; }
+  .auth-name { max-width: 56px; }
+  .auth-user-btn { padding: 6px 8px 6px 6px; }
+  #mobile-menu-btn { width: 36px; height: 36px; font-size: 18px; }
+  .header-actions { gap: 0; }
 }
